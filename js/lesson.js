@@ -32,29 +32,24 @@ function renderQuestions(questions) {
     container.appendChild(div);
   });
 
-  // store for checking
   window.lessonQuestions = questions;
 }
 
-/* ---------- NORMALIZATION HELPERS ---------- */
+/* ---------- KANA NORMALIZATION ---------- */
 
-// remove spaces only
-function normalize(text) {
-  return text.replace(/\s+/g, "");
+// kana only, no spaces, no kanji, katakana → hiragana
+function toKanaOnly(text) {
+  return text
+    .replace(/\s+/g, "")
+    .replace(/[\u4e00-\u9faf]/g, "") // strip kanji
+    .replace(/[\u30a1-\u30f6]/g, (ch) =>
+      String.fromCharCode(ch.charCodeAt(0) - 0x60),
+    );
 }
 
-// extract kana only (no kanji), normalize katakana → hiragana
-function normalizeKana(text) {
-  return (
-    text
-      .replace(/\s+/g, "")
-      // remove kanji
-      .replace(/[\u4e00-\u9faf]/g, "")
-      // katakana → hiragana
-      .replace(/[\u30a1-\u30f6]/g, (ch) =>
-        String.fromCharCode(ch.charCodeAt(0) - 0x60),
-      )
-  );
+// collapse duplicated kana: きき → き
+function collapseKana(text) {
+  return text.replace(/(.)\1+/g, "$1");
 }
 
 /* ---------- ANSWER CHECK ---------- */
@@ -62,21 +57,12 @@ function normalizeKana(text) {
 function checkAnswer(index) {
   const userRaw = document.getElementById(`answer-${index}`).value;
 
-  const userPlain = normalize(userRaw);
-  const userKana = normalizeKana(userRaw);
-
+  const userKana = collapseKana(toKanaOnly(userRaw));
   const answers = window.lessonQuestions[index].answers;
 
   const isCorrect = answers.some((ans) => {
-    const correctText = normalize(ans.text);
-    const correctKana = normalizeKana(ans.reading);
-
-    return (
-      // exact kanji/kana match
-      userPlain === correctText ||
-      // kana subsequence match (THIS IS THE FIX)
-      (userKana.length > 0 && correctKana.includes(userKana))
-    );
+    const correctKana = collapseKana(toKanaOnly(ans.reading));
+    return userKana.length > 0 && correctKana.includes(userKana);
   });
 
   const result = document.getElementById(`result-${index}`);
@@ -90,9 +76,20 @@ function checkAnswer(index) {
     result.style.color = "red";
   }
 
-  // DEBUG OUTPUT (for troubleshooting)
+  // DEBUG OUTPUT (now includes kanji answer)
   debug.textContent = `[DEBUG]
-User raw:        ${userRaw}
-User kana:       ${userKana}
-Correct kana:    ${normalizeKana(answers[0].reading)}`;
+User raw input:
+${userRaw}
+
+Canonical answer (kanji):
+${answers[0].text}
+
+Canonical reading:
+${answers[0].reading}
+
+User kana (normalized):
+${userKana}
+
+Correct kana (normalized):
+${collapseKana(toKanaOnly(answers[0].reading))}`;
 }
