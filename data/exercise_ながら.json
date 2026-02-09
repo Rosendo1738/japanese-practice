@@ -1,0 +1,53 @@
+{
+  "title": "ながら — Exercises",
+  "instructions": "Translate the English sentence into Japanese using ながら.",
+  "questions": [
+    {
+      "english": "I listen to music while studying.",
+      "answers": [
+        "音楽を聞きながら勉強する",
+        "おんがくをききながらべんきょうする",
+        "勉強しながら音楽を聞く",
+        "べんきょうしながらおんがくをきく"
+      ]
+    },
+    {
+      "english": "I drink coffee while reading a book.",
+      "answers": [
+        "本を読みながらコーヒーを飲む",
+        "ほんをよみながらこーひーをのむ",
+        "コーヒーを飲みながら本を読む",
+        "こーひーをのみながらほんをよむ"
+      ]
+    },
+    {
+      "english": "I walk while talking with a friend.",
+      "answers": ["友だちと話しながら歩く", "ともだちとはなしながらあるく"]
+    },
+    {
+      "english": "I eat dinner while watching a movie.",
+      "answers": [
+        "映画を見ながら晩ごはんを食べる",
+        "えいがをみながらばんごはんをたべる",
+        "晩ごはんを食べながら映画を見る",
+        "ばんごはんをたべながらえいがをみる"
+      ]
+    },
+    {
+      "english": "I write while listening to the teacher.",
+      "answers": [
+        "先生の話を聞きながら書く",
+        "せんせいのはなしをききながらかく"
+      ]
+    },
+    {
+      "english": "I study Japanese while riding the train.",
+      "answers": [
+        "電車に乗りながら日本語を勉強する",
+        "でんしゃにのりながらにほんごをべんきょうする",
+        "日本語を勉強しながら電車に乗る",
+        "にほんごをべんきょうしながらでんしゃにのる"
+      ]
+    }
+  ]
+}
