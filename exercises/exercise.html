@@ -6,8 +6,12 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <!-- TOP BACK BUTTON -->
-    <a href="../exercises.html">← Back to exercises</a>
+    <!-- TOP CONTROLS -->
+    <div style="margin-bottom: 10px">
+      <a href="../exercises.html">← Back to exercises</a>
+      |
+      <button onclick="resetThisExercise()">🧹 Reset this exercise</button>
+    </div>
 
     <h1 id="exercise-title"></h1>
     <p id="exercise-instructions"></p>
@@ -15,7 +19,7 @@
 
     <div id="questions"></div>
 
-    <!-- BOTTOM BACK BUTTON (optional but nice) -->
+    <!-- BOTTOM BACK (optional) -->
     <a href="../exercises.html">← Back to exercises</a>
 
     <script src="../js/exercise.js"></script>

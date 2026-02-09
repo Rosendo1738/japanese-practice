@@ -6,32 +6,50 @@
   </head>
   <body>
     <h1>Exercises</h1>
-    <p>Select an exercise. Your progress is shown below.</p>
+    <p>Select an exercise. Your saved progress is shown.</p>
+
+    <!-- CLEAR ALL PROGRESS -->
+    <button onclick="clearAllProgress()">🧹 Clear all progress</button>
 
     <ul>
       <li>
-        <a href="exercises/exercise.html?exercise=exercise_ながら">
+        <a href="exercises/exercise.html?exercise=exercise_nagara_1">
           ながら — Exercises
         </a>
-        <span id="progress-exercise_ながら"> (0/0)</span>
+        <span id="progress-exercise_nagara_1"> (0/0)</span>
       </li>
     </ul>
 
     <a href="index.html">← Back</a>
 
     <script>
-      const progressData = JSON.parse(localStorage.getItem("progress") || "{}");
+      function loadProgress() {
+        return JSON.parse(localStorage.getItem("progress") || "{}");
+      }
 
-      document.querySelectorAll("[id^='progress-']").forEach((el) => {
-        const exerciseName = el.id.replace("progress-", "");
-        const data = progressData[exerciseName];
+      function renderProgress() {
+        const progressData = loadProgress();
 
-        if (data) {
-          el.textContent = ` (${data.correct}/${data.total})`;
-        } else {
-          el.textContent = " (0/0)";
-        }
-      });
+        document.querySelectorAll("[id^='progress-']").forEach((el) => {
+          const exerciseName = el.id.replace("progress-", "");
+          const data = progressData[exerciseName];
+
+          if (data) {
+            el.textContent = ` (${data.correct}/${data.total})`;
+          } else {
+            el.textContent = " (0/0)";
+          }
+        });
+      }
+
+      function clearAllProgress() {
+        if (!confirm("Clear progress for ALL exercises?")) return;
+
+        localStorage.removeItem("progress");
+        renderProgress();
+      }
+
+      renderProgress();
     </script>
   </body>
 </html>

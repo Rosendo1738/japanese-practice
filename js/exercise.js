@@ -5,15 +5,40 @@ let progress = [];
 
 /* ---------- LOCAL STORAGE HELPERS ---------- */
 
+function loadAllProgress() {
+  return JSON.parse(localStorage.getItem("progress") || "{}");
+}
+
 function loadProgress(exerciseName) {
-  const data = JSON.parse(localStorage.getItem("progress") || "{}");
+  const data = loadAllProgress();
   return data[exerciseName] || null;
 }
 
 function saveProgress(exerciseName, correct, total) {
-  const data = JSON.parse(localStorage.getItem("progress") || "{}");
+  const data = loadAllProgress();
   data[exerciseName] = { correct, total };
   localStorage.setItem("progress", JSON.stringify(data));
+}
+
+function clearThisExerciseProgress(exerciseName) {
+  const data = loadAllProgress();
+  delete data[exerciseName];
+  localStorage.setItem("progress", JSON.stringify(data));
+}
+
+/* ---------- RESET HANDLER ---------- */
+
+function resetThisExercise() {
+  if (!confirm("Clear progress for this exercise?")) return;
+
+  clearThisExerciseProgress(exerciseName);
+
+  progress = new Array(progress.length).fill(false);
+  renderProgress();
+
+  document
+    .querySelectorAll("[id^='result-']")
+    .forEach((el) => (el.textContent = ""));
 }
 
 /* ---------- LOAD EXERCISE ---------- */
