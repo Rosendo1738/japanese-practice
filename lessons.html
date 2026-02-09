@@ -11,117 +11,61 @@
         padding: 20px;
       }
 
-      section {
-        margin-top: 60px;
-        padding-top: 40px;
-        border-top: 1px solid #ccc;
+      .lesson {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 15px;
       }
 
-      pre {
-        background: #f4f4f4;
-        padding: 10px;
+      .lesson button {
+        font-size: 1.1em;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        color: #0066cc;
+      }
+
+      .lesson-content {
+        display: none;
+        margin-top: 10px;
       }
     </style>
   </head>
-  <body id="top">
+  <body>
     <a href="index.html">← Back</a>
 
     <h1>Lessons</h1>
-    <p>Click a lesson to jump to that grammar point.</p>
+    <p>Click a lesson to expand it.</p>
 
-    <!-- TABLE OF CONTENTS -->
-    <ul>
-      <li><a href="#nagara">ながら</a></li>
-      <li><a href="#nari-nari">〜なり〜なり</a></li>
-    </ul>
+    <!-- ながら -->
+    <div class="lesson">
+      <button onclick="toggleLesson('nagara')">ながら</button>
+      <div id="lesson-nagara" class="lesson-content"></div>
+    </div>
 
-    <!-- ======================= -->
-    <!-- ながら LESSON -->
-    <!-- ======================= -->
-    <section id="nagara">
-      <h2>ながら</h2>
+    <!-- なりなり -->
+    <div class="lesson">
+      <button onclick="toggleLesson('nari-nari')">〜なり〜なり</button>
+      <div id="lesson-nari-nari" class="lesson-content"></div>
+    </div>
 
-      <p>
-        <strong>ながら</strong> is used to say that two actions happen
-        <strong>at the same time</strong>.
-      </p>
+    <script>
+      function toggleLesson(name) {
+        const container = document.getElementById(`lesson-${name}`);
 
-      <h3>Verb form</h3>
-
-      <p>
-        Use the <strong>ます-stem</strong> of a verb + <strong>ながら</strong>.
-      </p>
-
-      <h3>Structure</h3>
-      <pre>
-[Verb A (ます-stem)] + ながら + [Verb B]
-      </pre>
-
-      <h3>Examples</h3>
-      <ul>
-        <li>
-          音楽を聞きながら勉強する<br />
-          <small>おんがくをききながらべんきょうする</small>
-        </li>
-        <li>
-          本を読みながらコーヒーを飲む<br />
-          <small>ほんをよみながら こーひーをのむ</small>
-        </li>
-      </ul>
-
-      <h3>Practice</h3>
-      <a href="exercises/exercise.html?exercise=exercise_nagara_1">
-        → Go to ながら exercises
-      </a>
-
-      <p>
-        <a href="#top">↑ Back to top</a>
-      </p>
-    </section>
-
-    <!-- ======================= -->
-    <!-- ～なり～なり LESSON -->
-    <!-- ======================= -->
-    <section id="nari-nari">
-      <h2>〜なり〜なり</h2>
-
-      <p>
-        <strong>〜なり〜なり</strong> is used to give
-        <strong>examples of actions</strong>, similar to “things like A or B”.
-      </p>
-
-      <h3>Verb form</h3>
-
-      <p>
-        Use the <strong>dictionary form</strong> of the verb +
-        <strong>なり</strong>.
-      </p>
-
-      <h3>Structure</h3>
-      <pre>
-[Verb A] なり [Verb B] なり する
-      </pre>
-
-      <h3>Examples</h3>
-      <ul>
-        <li>
-          本を読むなりテレビを見るなりする<br />
-          <small>ほんをよむなり てれびをみるなり する</small>
-        </li>
-        <li>
-          家で寝るなり音楽を聞くなりする<br />
-          <small>いえで ねるなり おんがくをきくなり する</small>
-        </li>
-      </ul>
-
-      <h3>Practice</h3>
-      <a href="exercises/exercise.html?exercise=exercise_nari_nari_simple">
-        → Go to 〜なり〜なり exercises
-      </a>
-
-      <p>
-        <a href="#top">↑ Back to top</a>
-      </p>
-    </section>
+        if (container.innerHTML === "") {
+          fetch(`lessons/${name}.html`)
+            .then((res) => res.text())
+            .then((html) => {
+              container.innerHTML = html;
+              container.style.display = "block";
+            });
+        } else {
+          container.style.display =
+            container.style.display === "none" ? "block" : "none";
+        }
+      }
+    </script>
   </body>
 </html>
