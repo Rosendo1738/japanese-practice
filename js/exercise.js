@@ -24,9 +24,16 @@ function renderQuestions(questions) {
     div.innerHTML = `
       <p><strong>English:</strong> ${q.english}</p>
       <input type="text" id="answer-${index}" placeholder="Type Japanese here">
-      <button onclick="checkAnswer(${index})">Check</button>
+
+      <div style="margin-top:8px;">
+        <button onclick="checkAnswer(${index})">Check</button>
+        <button onclick="toggleAnswers(${index})" id="toggle-btn-${index}">
+          Show answers
+        </button>
+      </div>
+
       <p id="result-${index}"></p>
-      <div id="reveal-${index}" style="display:none;"></div>
+      <div id="answers-${index}" style="display:none;"></div>
     `;
 
     container.appendChild(div);
@@ -47,7 +54,6 @@ function checkAnswer(index) {
   const isCorrect = answers.some((ans) => userInput === normalize(ans));
 
   const result = document.getElementById(`result-${index}`);
-  const reveal = document.getElementById(`reveal-${index}`);
 
   if (isCorrect) {
     result.textContent = "✅ Correct!";
@@ -56,13 +62,26 @@ function checkAnswer(index) {
     result.textContent = "❌ Incorrect";
     result.style.color = "red";
   }
+}
 
-  // Reveal all acceptable answers after checking
-  reveal.style.display = "block";
-  reveal.innerHTML = `
-    <p><strong>Accepted answers:</strong></p>
-    <ul>
-      ${answers.map((a) => `<li>${a}</li>`).join("")}
-    </ul>
-  `;
+function toggleAnswers(index) {
+  const answers = window.exerciseQuestions[index].answers;
+  const container = document.getElementById(`answers-${index}`);
+  const button = document.getElementById(`toggle-btn-${index}`);
+
+  const isVisible = container.style.display === "block";
+
+  if (isVisible) {
+    container.style.display = "none";
+    button.textContent = "Show answers";
+  } else {
+    container.style.display = "block";
+    button.textContent = "Hide answers";
+    container.innerHTML = `
+      <p><strong>Accepted answers:</strong></p>
+      <ul>
+        ${answers.map((a) => `<li>${a}</li>`).join("")}
+      </ul>
+    `;
+  }
 }
