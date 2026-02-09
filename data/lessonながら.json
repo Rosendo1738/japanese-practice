@@ -1,0 +1,60 @@
+{
+  "title": "Lesson: ながら (Doing two things at once)",
+  "instructions": "Translate the English sentence into Japanese using ながら. You may answer in kana, kanji, or a mix.",
+  "questions": [
+    {
+      "english": "I listen to music while studying.",
+      "answers": [
+        {
+          "text": "音楽を聞きながら勉強する",
+          "reading": "おんがくをききながらべんきょうする"
+        }
+      ]
+    },
+    {
+      "english": "I drink coffee while reading a book.",
+      "answers": [
+        {
+          "text": "本を読みながらコーヒーを飲む",
+          "reading": "ほんをよみながらこーひーをのむ"
+        }
+      ]
+    },
+    {
+      "english": "I walk while talking with a friend.",
+      "answers": [
+        {
+          "text": "友だちと話しながら歩く",
+          "reading": "ともだちとはなしながらあるく"
+        }
+      ]
+    },
+    {
+      "english": "I eat dinner while watching a movie.",
+      "answers": [
+        {
+          "text": "映画を見ながら晩ごはんを食べる",
+          "reading": "えいがをみながらばんごはんをたべる"
+        }
+      ]
+    },
+    {
+      "english": "I write while listening to the teacher.",
+      "answers": [
+        {
+          "text": "先生の話を聞きながら書く",
+          "reading": "せんせいのはなしをききながらかく"
+        }
+      ]
+    },
+    {
+      "english": "I study Japanese while riding the train.",
+      "answers": [
+        {
+          "text": "電車に乗りながら日本語を勉強する",
+          "reading": "でんしゃにのりながらにほんごをべんきょうする"
+        }
+      ]
+    }
+  ]
+}
