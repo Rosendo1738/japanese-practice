@@ -1,37 +1,47 @@
 {
   "title": "Verb Stems — Exercises",
   "instructions": "Write the verb stem for the given verb.",
+  "wordBank": [
+    { "en": "listen", "jp": "聞く" },
+    { "en": "read", "jp": "読む" },
+    { "en": "eat", "jp": "食べる" },
+    { "en": "write", "jp": "書く" },
+    { "en": "see", "jp": "見る" },
+    { "en": "speak", "jp": "話す" },
+    { "en": "do", "jp": "する" },
+    { "en": "come", "jp": "来る（くる)" }
+  ],
   "questions": [
     {
-      "english": "Verb: 聞く",
+      "prompt": "Verb: 聞く",
       "answers": ["聞き", "きき"]
     },
     {
-      "english": "Verb: 読む",
+      "prompt": "Verb: 読む",
       "answers": ["読み", "よみ"]
     },
     {
-      "english": "Verb: 食べる",
+      "prompt": "Verb: 食べる",
       "answers": ["食べ", "たべ"]
     },
     {
-      "english": "Verb: 書く",
+      "prompt": "Verb: 書く",
       "answers": ["書き", "かき"]
     },
     {
-      "english": "Verb: 見る",
+      "prompt": "Verb: 見る",
       "answers": ["見", "み"]
     },
     {
-      "english": "Verb: 話す",
+      "prompt": "Verb: 話す",
       "answers": ["話し", "はなし"]
     },
     {
-      "english": "Verb: する",
+      "prompt": "Verb: する",
       "answers": ["し"]
     },
     {
-      "english": "Verb: 来る",
+      "prompt": "Verb: 来る",
       "answers": ["来", "き"]
     }
   ]

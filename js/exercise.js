@@ -3,15 +3,10 @@ const exerciseName = params.get("exercise");
 
 let progress = [];
 
-/* ---------- LOCAL STORAGE HELPERS ---------- */
+/* ---------- STORAGE ---------- */
 
 function loadAllProgress() {
   return JSON.parse(localStorage.getItem("progress") || "{}");
-}
-
-function loadProgress(exerciseName) {
-  const data = loadAllProgress();
-  return data[exerciseName] || null;
 }
 
 function saveProgress(exerciseName, correct, total) {
@@ -20,28 +15,7 @@ function saveProgress(exerciseName, correct, total) {
   localStorage.setItem("progress", JSON.stringify(data));
 }
 
-function clearThisExerciseProgress(exerciseName) {
-  const data = loadAllProgress();
-  delete data[exerciseName];
-  localStorage.setItem("progress", JSON.stringify(data));
-}
-
-/* ---------- RESET HANDLER ---------- */
-
-function resetThisExercise() {
-  if (!confirm("Clear progress for this exercise?")) return;
-
-  clearThisExerciseProgress(exerciseName);
-
-  progress = new Array(progress.length).fill(false);
-  renderProgress();
-
-  document
-    .querySelectorAll("[id^='result-']")
-    .forEach((el) => (el.textContent = ""));
-}
-
-/* ---------- LOAD EXERCISE ---------- */
+/* ---------- LOAD ---------- */
 
 fetch(`../data/${exerciseName}.json`)
   .then((res) => res.json())
@@ -52,25 +26,41 @@ fetch(`../data/${exerciseName}.json`)
 
     progress = new Array(data.questions.length).fill(false);
 
-    const saved = loadProgress(exerciseName);
-    if (saved) {
-      for (let i = 0; i < saved.correct && i < progress.length; i++) {
-        progress[i] = true;
-      }
-    }
-
     renderProgress();
+    renderWordBank(data.wordBank || []);
     renderQuestions(data.questions);
-  })
-  .catch((err) => console.error("Failed to load exercise:", err));
+  });
 
 /* ---------- RENDER ---------- */
 
 function renderProgress() {
   const el = document.getElementById("progress");
   const correct = progress.filter(Boolean).length;
-  const total = progress.length;
-  el.textContent = `Progress: ${correct} / ${total} correct`;
+  el.textContent = `Progress: ${correct} / ${progress.length}`;
+}
+
+function renderWordBank(words) {
+  if (!words.length) return;
+
+  const container = document.createElement("div");
+  container.className = "question";
+
+  container.innerHTML = `
+    <p><strong>Word Bank</strong></p>
+    <button onclick="toggleWordBank()">Show word bank</button>
+    <div id="word-bank" style="display:none; margin-top:8px;">
+      <ul>
+        ${words.map((w) => `<li>${w.en} — ${w.jp}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+
+  document.getElementById("questions").before(container);
+}
+
+function toggleWordBank() {
+  const el = document.getElementById("word-bank");
+  el.style.display = el.style.display === "none" ? "block" : "none";
 }
 
 function renderQuestions(questions) {
@@ -82,10 +72,10 @@ function renderQuestions(questions) {
     div.className = "question";
 
     div.innerHTML = `
-      <p><strong>English:</strong> ${q.english}</p>
-      <input type="text" id="answer-${index}" placeholder="Type Japanese here">
+      <p><strong>Prompt:</strong> ${q.prompt}</p>
+      <input type="text" id="answer-${index}" />
 
-      <div style="margin-top:8px;">
+      <div>
         <button onclick="checkAnswer(${index})">Check</button>
         <button onclick="toggleAnswers(${index})" id="toggle-btn-${index}">
           Show answers
@@ -102,7 +92,7 @@ function renderQuestions(questions) {
   window.exerciseQuestions = questions;
 }
 
-/* ---------- CHECKING ---------- */
+/* ---------- CHECK ---------- */
 
 function normalize(text) {
   return text.replace(/\s+/g, "");
@@ -114,45 +104,40 @@ function checkAnswer(index) {
   const answers = window.exerciseQuestions[index].answers;
   const result = document.getElementById(`result-${index}`);
 
-  const isCorrect = answers.some((ans) => userInput === normalize(ans));
+  const correct = answers.some((ans) => normalize(ans) === userInput);
 
-  if (isCorrect) {
+  if (correct) {
     result.textContent = "✅ Correct!";
     result.style.color = "green";
-
-    if (!progress[index]) {
-      progress[index] = true;
-      renderProgress();
-
-      saveProgress(
-        exerciseName,
-        progress.filter(Boolean).length,
-        progress.length,
-      );
-    }
+    progress[index] = true;
+    renderProgress();
+    saveProgress(
+      exerciseName,
+      progress.filter(Boolean).length,
+      progress.length,
+    );
   } else {
     result.textContent = "❌ Incorrect";
     result.style.color = "red";
   }
 }
 
-/* ---------- ANSWER TOGGLE ---------- */
+/* ---------- ANSWERS ---------- */
 
 function toggleAnswers(index) {
-  const answers = window.exerciseQuestions[index].answers;
   const container = document.getElementById(`answers-${index}`);
   const button = document.getElementById(`toggle-btn-${index}`);
+  const answers = window.exerciseQuestions[index].answers;
 
-  const isVisible = container.style.display === "block";
+  const visible = container.style.display === "block";
 
-  if (isVisible) {
+  if (visible) {
     container.style.display = "none";
     button.textContent = "Show answers";
   } else {
     container.style.display = "block";
     button.textContent = "Hide answers";
     container.innerHTML = `
-      <p><strong>Accepted answers:</strong></p>
       <ul>
         ${answers.map((a) => `<li>${a}</li>`).join("")}
       </ul>

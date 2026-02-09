@@ -1,37 +1,47 @@
 {
   "title": "〜なり〜なり — Simple Exercises",
-  "instructions": "Translate the English sentence into Japanese using 〜なり〜なり.",
+  "instructions": "Translate the prompt sentence into Japanese using 〜なり〜なり.",
+  "wordBank": [
+    { "en": "book", "jp": "本（ほん）" },
+    { "en": "read", "jp": "読む（よむ）" },
+    { "en": "TV", "jp": "テレビ" },
+    { "en": "watch", "jp": "見る（みる）" },
+    { "en": "music", "jp": "音楽（おんがく）" },
+    { "en": "listen", "jp": "聞く（きく）" },
+    { "en": "sleep", "jp": "寝る（ねる）" },
+    { "en": "do (general)", "jp": "する" }
+  ],
   "questions": [
     {
-      "english": "On weekends, I do things like read books or watch TV.",
+      "prompt": "On weekends, I do things like read books or watch TV.",
       "answers": [
         "週末は本を読むなりテレビを見るなりする",
         "しゅうまつはほんをよむなりてれびをみるなりする"
       ]
     },
     {
-      "english": "After school, I do things like study or play games.",
+      "prompt": "After school, I do things like study or play games.",
       "answers": [
         "学校のあとで勉強するなりゲームをするなりする",
         "がっこうのあとでべんきょうするなりげーむをするなりする"
       ]
     },
     {
-      "english": "At home, I do things like listen to music or read.",
+      "prompt": "At home, I do things like listen to music or read.",
       "answers": [
         "家で音楽を聞くなり本を読むなりする",
         "いえでおんがくをきくなりほんをよむなりする"
       ]
     },
     {
-      "english": "At night, I do things like watch videos or listen to music.",
+      "prompt": "At night, I do things like watch videos or listen to music.",
       "answers": [
         "夜はビデオを見るなり音楽を聞くなりする",
         "よるはびでおをみるなりおんがくをきくなりする"
       ]
     },
     {
-      "english": "On my days off, I do things like sleep or watch TV.",
+      "prompt": "On my days off, I do things like sleep or watch TV.",
       "answers": [
         "休みの日は寝るなりテレビを見るなりする",
         "やすみのひはねるなりてれびをみるなりする"

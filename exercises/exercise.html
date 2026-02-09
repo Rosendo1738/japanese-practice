@@ -2,27 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Japanese Exercises</title>
+    <title>Exercise</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <!-- TOP CONTROLS -->
-    <div style="margin-bottom: 10px">
+    <div class="container">
+      <!-- TOP NAV -->
+      <div style="margin-bottom: 12px">
+        <a href="../exercises.html">← Back to exercises</a>
+        |
+        <a href="../lessons.html">📘 Lessons</a>
+      </div>
+
+      <h1 id="exercise-title"></h1>
+      <p id="exercise-instructions"></p>
+      <p id="progress"></p>
+
+      <div id="questions"></div>
+
+      <!-- BOTTOM NAV -->
+      <hr />
       <a href="../exercises.html">← Back to exercises</a>
-      |
-      <a href="../lessons.html#nagara">📘 Review lesson</a>
-      |
-      <button onclick="resetThisExercise()">🧹 Reset this exercise</button>
     </div>
-
-    <h1 id="exercise-title"></h1>
-    <p id="exercise-instructions"></p>
-    <p id="progress"></p>
-
-    <div id="questions"></div>
-
-    <!-- BOTTOM BACK (optional) -->
-    <a href="../exercises.html">← Back to exercises</a>
 
     <script src="../js/exercise.js"></script>
   </body>

@@ -1,9 +1,19 @@
 {
   "title": "ながら — Exercises",
-  "instructions": "Translate the English sentence into Japanese using ながら.",
+  "instructions": "Translate the prompt sentence into Japanese using ながら.",
+  "wordBank": [
+    { "en": "music", "jp": "音楽（おんがく）" },
+    { "en": "listen", "jp": "聞く（きく）" },
+    { "en": "study", "jp": "勉強する（べんきょうする）" },
+    { "en": "while", "jp": "ながら" },
+    { "en": "book", "jp": "本（ほん）" },
+    { "en": "read", "jp": "読む（よむ）" },
+    { "en": "coffee", "jp": "コーヒー" },
+    { "en": "drink", "jp": "飲む（のむ）" }
+  ],
   "questions": [
     {
-      "english": "I listen to music while studying.",
+      "prompt": "I listen to music while studying.",
       "answers": [
         "音楽を聞きながら勉強する",
         "おんがくをききながらべんきょうする",
@@ -12,7 +22,7 @@
       ]
     },
     {
-      "english": "I drink coffee while reading a book.",
+      "prompt": "I drink coffee while reading a book.",
       "answers": [
         "本を読みながらコーヒーを飲む",
         "ほんをよみながらこーひーをのむ",
@@ -21,11 +31,11 @@
       ]
     },
     {
-      "english": "I walk while talking with a friend.",
+      "prompt": "I walk while talking with a friend.",
       "answers": ["友だちと話しながら歩く", "ともだちとはなしながらあるく"]
     },
     {
-      "english": "I eat dinner while watching a movie.",
+      "prompt": "I eat dinner while watching a movie.",
       "answers": [
         "映画を見ながら晩ごはんを食べる",
         "えいがをみながらばんごはんをたべる",
@@ -34,14 +44,14 @@
       ]
     },
     {
-      "english": "I write while listening to the teacher.",
+      "prompt": "I write while listening to the teacher.",
       "answers": [
         "先生の話を聞きながら書く",
         "せんせいのはなしをききながらかく"
       ]
     },
     {
-      "english": "I study Japanese while riding the train.",
+      "prompt": "I study Japanese while riding the train.",
       "answers": [
         "電車に乗りながら日本語を勉強する",
         "でんしゃにのりながらにほんごをべんきょうする",

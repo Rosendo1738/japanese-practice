@@ -3,37 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <title>Exercises</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1>Exercises</h1>
-    <p>Select an exercise. Your saved progress is shown.</p>
+    <div class="container">
+      <h1>Exercises</h1>
+      <p>Select an exercise. Your saved progress is shown.</p>
 
-    <!-- CLEAR ALL PROGRESS -->
-    <button onclick="clearAllProgress()">🧹 Clear all progress</button>
+      <!-- CLEAR ALL PROGRESS -->
+      <button onclick="clearAllProgress()">🧹 Clear all progress</button>
 
-    <ul>
-      <li>
-        <a href="exercises/exercise.html?exercise=exercise_verb_stem_1">
-          Verb Stems — Exercises
-        </a>
-        <span id="progress-exercise_verb_stem_1"> (0/0)</span>
-      </li>
-      <li>
-        <a href="exercises/exercise.html?exercise=exercise_nagara_1">
-          ながら — Exercises
-        </a>
-        <span id="progress-exercise_nagara_1"> (0/0)</span>
-      </li>
+      <ul>
+        <li>
+          <a href="exercises/exercise.html?exercise=exercise_verb_stem_1">
+            Verb Stems — Exercises
+          </a>
+          <span id="progress-exercise_verb_stem_1"> (0/0)</span>
+        </li>
+        <li>
+          <a href="exercises/exercise.html?exercise=exercise_nagara_1">
+            ながら — Exercises
+          </a>
+          <span id="progress-exercise_nagara_1"> (0/0)</span>
+        </li>
 
-      <li>
-        <a href="exercises/exercise.html?exercise=exercise_nari_nari_simple">
-          〜なり〜なり — Exercises
-        </a>
-        <span id="progress-exercise_nari_nari_simple"> (0/0)</span>
-      </li>
-    </ul>
+        <li>
+          <a href="exercises/exercise.html?exercise=exercise_nari_nari_simple">
+            〜なり〜なり — Exercises
+          </a>
+          <span id="progress-exercise_nari_nari_simple"> (0/0)</span>
+        </li>
+      </ul>
 
-    <a href="index.html">← Back</a>
+      <a href="index.html">← Back</a>
+    </div>
 
     <script>
       function loadProgress() {
