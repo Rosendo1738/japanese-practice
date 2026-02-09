@@ -1,0 +1,38 @@
+{
+  "title": "Verb Stems — Exercises",
+  "instructions": "Write the verb stem for the given verb.",
+  "questions": [
+    {
+      "english": "Verb: 聞く",
+      "answers": ["聞き", "きき"]
+    },
+    {
+      "english": "Verb: 読む",
+      "answers": ["読み", "よみ"]
+    },
+    {
+      "english": "Verb: 食べる",
+      "answers": ["食べ", "たべ"]
+    },
+    {
+      "english": "Verb: 書く",
+      "answers": ["書き", "かき"]
+    },
+    {
+      "english": "Verb: 見る",
+      "answers": ["見", "み"]
+    },
+    {
+      "english": "Verb: 話す",
+      "answers": ["話し", "はなし"]
+    },
+    {
+      "english": "Verb: する",
+      "answers": ["し"]
+    },
+    {
+      "english": "Verb: 来る",
+      "answers": ["来", "き"]
+    }
+  ]
+}
