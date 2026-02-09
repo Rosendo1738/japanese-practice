@@ -2,76 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Japanese Lessons</title>
+    <title>Lessons</title>
+    <link rel="stylesheet" href="css/style.css" />
     <style>
-      body {
-        line-height: 1.6;
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-      }
-
-      .lesson {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 15px;
-      }
-
-      .lesson button {
-        font-size: 1.1em;
+      .group-header {
         cursor: pointer;
-        background: none;
-        border: none;
-        padding: 0;
-        color: #0066cc;
+        user-select: none;
+        margin-top: 24px;
+        font-weight: bold;
       }
 
       .lesson-content {
         display: none;
-        margin-top: 10px;
+        margin-left: 16px;
+        margin-top: 8px;
+      }
+
+      .lesson-link {
+        cursor: pointer;
+        color: #0066cc;
+        text-decoration: underline;
+        display: block;
+        margin: 6px 0;
       }
     </style>
   </head>
   <body>
-    <a href="index.html">← Back</a>
+    <div class="container">
+      <h1>Lessons</h1>
+      <p>Select a lesson to read the explanation.</p>
 
-    <h1>Lessons</h1>
-    <p>Click a lesson to expand it.</p>
+      <div id="lesson-list"></div>
 
-    <!-- verb stems -->
-    <div class="lesson">
-      <button onclick="toggleLesson('verb-stems')">
-        Verb Stems / ます-stem</button>
-      <div id="lesson-verb-stems" class="lesson-content"></div>
-    </div>
-    <!-- ながら -->
-    <div class="lesson">
-      <button onclick="toggleLesson('nagara')">ながら</button>
-      <div id="lesson-nagara" class="lesson-content"></div>
-    </div>
-
-    <!-- なりなり -->
-    <div class="lesson">
-      <button onclick="toggleLesson('nari-nari')">〜なり〜なり</button>
-      <div id="lesson-nari-nari" class="lesson-content"></div>
+      <a href="index.html">← Back</a>
     </div>
 
     <script>
-      function toggleLesson(name) {
-        const container = document.getElementById(`lesson-${name}`);
+      function renderLessons(lessons) {
+        const container = document.getElementById("lesson-list");
+        container.innerHTML = "";
 
-        if (container.innerHTML === "") {
-          fetch(`lessons/${name}.html`)
-            .then((res) => res.text())
-            .then((html) => {
-              container.innerHTML = html;
-              container.style.display = "block";
-            });
-        } else {
-          container.style.display =
-            container.style.display === "none" ? "block" : "none";
-        }
+        const groupMap = {};
+
+        lessons.forEach((lesson) => {
+          const groups =
+            Array.isArray(lesson.groups) && lesson.groups.length
+              ? lesson.groups
+              : ["other"];
+
+          groups.forEach((group) => {
+            if (!groupMap[group]) groupMap[group] = [];
+            groupMap[group].push(lesson);
+          });
+        });
+
+        Object.entries(groupMap).forEach(([group, items]) => {
+          const header = document.createElement("div");
+          header.className = "group-header";
+          header.textContent = `▶ ${formatGroupName(group)}`;
+
+          const groupDiv = document.createElement("div");
+          groupDiv.style.display = "none";
+
+          header.onclick = () => {
+            const open = groupDiv.style.display === "block";
+            groupDiv.style.display = open ? "none" : "block";
+            header.textContent = `${open ? "▶" : "▼"} ${formatGroupName(group)}`;
+          };
+
+          items.forEach((lesson) => {
+            const link = document.createElement("div");
+            link.className = "lesson-link";
+            link.textContent = lesson.title;
+            link.onclick = () => loadLesson(lesson);
+            groupDiv.appendChild(link);
+          });
+
+          container.appendChild(header);
+          container.appendChild(groupDiv);
+        });
       }
+
+      function loadLesson(lesson) {
+        fetch(`lessons/${lesson.file}`)
+          .then((res) => res.text())
+          .then((html) => {
+            const container = document.createElement("div");
+            container.className = "lesson-content question";
+            container.innerHTML = html;
+
+            document
+              .querySelectorAll(".lesson-content")
+              .forEach((el) => el.remove());
+            document.querySelector(".container").appendChild(container);
+            container.style.display = "block";
+            window.scrollTo({
+              top: container.offsetTop - 20,
+              behavior: "smooth",
+            });
+          });
+      }
+
+      function formatGroupName(key) {
+        const map = {
+          foundations: "Foundations",
+          "verb-stems": "Verb Stems",
+          nagara: "ながら",
+          "nari-nari": "〜なり〜なり",
+          other: "Other",
+        };
+        return map[key] || key;
+      }
+
+      fetch("data/lessons.json")
+        .then((res) => res.json())
+        .then((data) => renderLessons(data));
     </script>
   </body>
 </html>

@@ -1,0 +1,75 @@
+{
+  "title": "X は Y です — Exercises",
+  "instructions": "Translate using the pattern X は Y です.",
+  "wordBank": [
+    { "en": "I", "jp": "私（わたし）" },
+    { "en": "you", "jp": "あなた" },
+    { "en": "student", "jp": "学生（がくせい）" },
+    { "en": "teacher", "jp": "先生（せんせい）" },
+    { "en": "Japanese person", "jp": "日本人（にほんじん）" },
+    { "en": "American", "jp": "アメリカ人（あめりかじん）" },
+    { "en": "friend", "jp": "友だち（ともだち）" },
+    { "en": "this", "jp": "これ" },
+    { "en": "that (near you)", "jp": "それ" },
+    { "en": "that (over there)", "jp": "あれ" },
+    { "en": "book", "jp": "本（ほん）" },
+    { "en": "pen", "jp": "ペン" },
+    { "en": "phone", "jp": "スマホ" },
+    { "en": "water", "jp": "水（みず）" },
+    { "en": "coffee", "jp": "コーヒー" },
+    { "en": "school", "jp": "学校（がっこう）" },
+    { "en": "Japanese language", "jp": "日本語（にほんご）" },
+    { "en": "English language", "jp": "英語（えいご）" },
+    { "en": "is", "jp": "です" }
+  ],
+  "questions": [
+    {
+      "prompt": "I am a student.",
+      "answers": ["私は学生です", "わたしはがくせいです"]
+    },
+    {
+      "prompt": "I am Japanese.",
+      "answers": ["私は日本人です", "わたしはにほんじんです"]
+    },
+    {
+      "prompt": "I am American.",
+      "answers": ["私はアメリカ人です", "わたしはあめりかじんです"]
+    },
+    {
+      "prompt": "You are a student.",
+      "answers": ["あなたは学生です", "あなたはがくせいです"]
+    },
+    {
+      "prompt": "My friend is a student.",
+      "answers": ["友だちは学生です", "ともだちはがくせいです"]
+    },
+    {
+      "prompt": "That person is a teacher.",
+      "answers": ["あの人は先生です", "あのひとはせんせいです"]
+    },
+    {
+      "prompt": "This is a book.",
+      "answers": ["これは本です", "これはほんです"]
+    },
+    {
+      "prompt": "That is a pen.",
+      "answers": ["それはペンです"]
+    },
+    {
+      "prompt": "That (over there) is a phone.",
+      "answers": ["あれはスマホです"]
+    },
+    {
+      "prompt": "This is water.",
+      "answers": ["これは水です", "これはみずです"]
+    },
+    {
+      "prompt": "This is coffee.",
+      "answers": ["これはコーヒーです"]
+    },
+    {
+      "prompt": "This is a school.",
+      "answers": ["これは学校です", "これはがっこうです"]
+    }
+  ]
+}

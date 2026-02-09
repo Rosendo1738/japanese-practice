@@ -1,0 +1,32 @@
+[
+  {
+    "id": "wa-desu",
+    "title": "X は Y です",
+    "groups": ["foundations"],
+    "file": "wa-desu.html"
+  },
+  {
+    "id": "no-particle",
+    "title": "の Particle",
+    "groups": ["foundations"],
+    "file": "no-particle.html"
+  },
+  {
+    "id": "verb-stems",
+    "title": "Verb Stems (ます-stem)",
+    "groups": ["foundations", "nagara"],
+    "file": "verb-stems.html"
+  },
+  {
+    "id": "nagara",
+    "title": "ながら",
+    "groups": ["nagara"],
+    "file": "nagara.html"
+  },
+  {
+    "id": "nari-nari",
+    "title": "〜なり〜なり",
+    "groups": ["nari-nari"],
+    "file": "nari-nari.html"
+  }
+]

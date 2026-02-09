@@ -1,0 +1,59 @@
+{
+  "title": "の Particle — Exercises",
+  "instructions": "Translate using the pattern A の B or X は A の B です.",
+  "wordBank": [
+    { "en": "I / my", "jp": "私（わたし）" },
+    { "en": "friend", "jp": "友だち（ともだち）" },
+    { "en": "cat", "jp": "猫（ねこ）" },
+    { "en": "dog", "jp": "犬（いぬ）" },
+    { "en": "book", "jp": "本（ほん）" },
+    { "en": "pen", "jp": "ペン" },
+    { "en": "teacher", "jp": "先生（せんせい）" },
+    { "en": "student", "jp": "学生（がくせい）" },
+    { "en": "university", "jp": "大学（だいがく）" },
+    { "en": "graduate school", "jp": "大学院（だいがくいん）" },
+    { "en": "school", "jp": "学校（がっこう）" },
+    { "en": "Japanese language", "jp": "日本語（にほんご）" },
+    { "en": "this", "jp": "これ" },
+    { "en": "that (over there)", "jp": "あれ" },
+    { "en": "topic marker", "jp": "は" },
+    { "en": "polite ending", "jp": "です" }
+  ],
+  "questions": [
+    {
+      "prompt": "My book.",
+      "answers": ["私の本", "わたしのほん"]
+    },
+    {
+      "prompt": "My cat.",
+      "answers": ["私の猫", "わたしのねこ"]
+    },
+    {
+      "prompt": "My friend’s dog.",
+      "answers": ["友だちの犬", "ともだちのいぬ"]
+    },
+    {
+      "prompt": "This is my pen.",
+      "answers": ["これは私のペンです", "これはわたしのペンです"]
+    },
+    {
+      "prompt": "That is my friend’s book.",
+      "answers": ["あれは友だちの本です", "あれはともだちのほんです"]
+    },
+    {
+      "prompt": "I am a university student.",
+      "answers": ["私は大学の学生です", "わたしはだいがくのがくせいです"]
+    },
+    {
+      "prompt": "I am a graduate student.",
+      "answers": ["私は大学院の学生です", "わたしはだいがくいんのがくせいです"]
+    },
+    {
+      "prompt": "That person is my friend’s teacher.",
+      "answers": [
+        "あの人は友だちの先生です",
+        "あのひとはともだちのせんせいです"
+      ]
+    }
+  ]
+}

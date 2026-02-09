@@ -1,5 +1,15 @@
 [
   {
+    "id": "exercise_wa_desu_1",
+    "title": "X は Y です — Exercises",
+    "groups": ["foundations"]
+  },
+  {
+    "id": "exercise_no_particle_1",
+    "title": "の Particle — Exercises",
+    "groups": ["foundations"]
+  },
+  {
     "id": "exercise_verb_stem_1",
     "title": "Verb Stems — Exercises",
     "groups": ["verb-stems", "nagara"]
