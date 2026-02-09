@@ -16,6 +16,7 @@
 
       <hr />
 
+      <!-- MAIN NAV -->
       <h2>Get started</h2>
 
       <ul>
@@ -32,7 +33,59 @@
 
       <hr />
 
+      <!-- ANNOUNCEMENTS -->
+      <h2>📢 Announcements</h2>
+      <div id="announcements">
+        <p class="small">Loading announcements…</p>
+      </div>
+
+      <hr />
+
       <p class="small">Progress is saved locally in your browser.</p>
     </div>
+
+    <script>
+      /* ---------- SIMPLE MARKDOWN RENDERER ---------- */
+      function renderMarkdown(text) {
+        return (
+          text
+            // bold **text**
+            .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+            // italics *text*
+            .replace(/\*(.+?)\*/g, "<em>$1</em>")
+            // bullet points
+            .replace(/^- (.+)$/gm, "<li>$1</li>")
+            // line breaks
+            .replace(/\n\n/g, "<br><br>")
+            .replace(/\n/g, "<br>")
+        );
+      }
+
+      /* ---------- LOAD ANNOUNCEMENTS ---------- */
+      fetch("data/announcements.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const container = document.getElementById("announcements");
+          container.innerHTML = "";
+
+          if (!data.length) {
+            container.innerHTML = "<p class='small'>No announcements yet.</p>";
+            return;
+          }
+
+          data.forEach((item) => {
+            const div = document.createElement("div");
+            div.className = "question"; // reuse card styling
+
+            div.innerHTML = `
+              <strong>${item.title}</strong>
+              <div class="small">${item.date}</div>
+              <p>${renderMarkdown(item.message)}</p>
+            `;
+
+            container.appendChild(div);
+          });
+        });
+    </script>
   </body>
 </html>

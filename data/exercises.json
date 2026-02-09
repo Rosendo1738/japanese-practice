@@ -1,0 +1,17 @@
+[
+  {
+    "id": "exercise_verb_stem_1",
+    "title": "Verb Stems — Exercises",
+    "groups": ["verb-stems", "nagara"]
+  },
+  {
+    "id": "exercise_nagara_1",
+    "title": "ながら — Exercises",
+    "groups": ["nagara"]
+  },
+  {
+    "id": "exercise_nari_nari_simple",
+    "title": "〜なり〜なり — Exercises",
+    "groups": ["nari-nari"]
+  }
+]

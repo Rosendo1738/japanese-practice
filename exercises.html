@@ -4,68 +4,143 @@
     <meta charset="UTF-8" />
     <title>Exercises</title>
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Group dropdown styling */
+      .group-header {
+        cursor: pointer;
+        user-select: none;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      .group-header span {
+        margin-left: 6px;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      .group-content {
+        margin-left: 16px;
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <h1>Exercises</h1>
       <p>Select an exercise. Your saved progress is shown.</p>
 
-      <!-- CLEAR ALL PROGRESS -->
       <button onclick="clearAllProgress()">🧹 Clear all progress</button>
 
-      <ul>
-        <li>
-          <a href="exercises/exercise.html?exercise=exercise_verb_stem_1">
-            Verb Stems — Exercises
-          </a>
-          <span id="progress-exercise_verb_stem_1"> (0/0)</span>
-        </li>
-        <li>
-          <a href="exercises/exercise.html?exercise=exercise_nagara_1">
-            ながら — Exercises
-          </a>
-          <span id="progress-exercise_nagara_1"> (0/0)</span>
-        </li>
-
-        <li>
-          <a href="exercises/exercise.html?exercise=exercise_nari_nari_simple">
-            〜なり〜なり — Exercises
-          </a>
-          <span id="progress-exercise_nari_nari_simple"> (0/0)</span>
-        </li>
-      </ul>
+      <!-- GROUPED EXERCISE LIST -->
+      <div id="exercise-list"></div>
 
       <a href="index.html">← Back</a>
     </div>
 
     <script>
+      /* ---------- PROGRESS ---------- */
+
       function loadProgress() {
         return JSON.parse(localStorage.getItem("progress") || "{}");
       }
 
-      function renderProgress() {
+      function clearAllProgress() {
+        if (!confirm("Clear progress for ALL exercises?")) return;
+        localStorage.removeItem("progress");
+        renderExercises(window.exerciseIndex);
+      }
+
+      /* ---------- RENDERING ---------- */
+
+      function renderExercises(exercises) {
+        const container = document.getElementById("exercise-list");
+        container.innerHTML = "";
+
         const progressData = loadProgress();
 
-        document.querySelectorAll("[id^='progress-']").forEach((el) => {
-          const exerciseName = el.id.replace("progress-", "");
-          const data = progressData[exerciseName];
+        // Build group → exercises map
+        const groupMap = {};
 
-          if (data) {
-            el.textContent = ` (${data.correct}/${data.total})`;
-          } else {
-            el.textContent = " (0/0)";
-          }
+        exercises.forEach((ex) => {
+          const groups =
+            Array.isArray(ex.groups) && ex.groups.length
+              ? ex.groups
+              : ["other"];
+
+          groups.forEach((group) => {
+            if (!groupMap[group]) groupMap[group] = [];
+            groupMap[group].push(ex);
+          });
+        });
+
+        // Render each group as dropdown
+        Object.entries(groupMap).forEach(([group, items]) => {
+          const header = document.createElement("div");
+          header.className = "group-header";
+          header.innerHTML = `
+            ▶ ${formatGroupName(group)}
+            <span>(${items.length})</span>
+          `;
+
+          const content = document.createElement("div");
+          content.className = "group-content";
+
+          const ul = document.createElement("ul");
+
+          items.forEach((ex) => {
+            const progress = progressData[ex.id];
+            const progressText = progress
+              ? ` (${progress.correct}/${progress.total})`
+              : " (0/0)";
+
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <a href="exercises/exercise.html?exercise=${ex.id}">
+                ${ex.title}
+              </a>
+              <span>${progressText}</span>
+            `;
+            ul.appendChild(li);
+          });
+
+          content.appendChild(ul);
+
+          // Toggle logic
+          header.onclick = () => {
+            const isOpen = content.style.display === "block";
+            content.style.display = isOpen ? "none" : "block";
+            header.innerHTML = `
+              ${isOpen ? "▶" : "▼"} ${formatGroupName(group)}
+              <span>(${items.length})</span>
+            `;
+          };
+
+          container.appendChild(header);
+          container.appendChild(content);
         });
       }
 
-      function clearAllProgress() {
-        if (!confirm("Clear progress for ALL exercises?")) return;
-
-        localStorage.removeItem("progress");
-        renderProgress();
+      function formatGroupName(key) {
+        const map = {
+          "verb-stems": "Verb Stems",
+          nagara: "ながら",
+          "nari-nari": "〜なり〜なり",
+          other: "Other",
+        };
+        return map[key] || key;
       }
 
-      renderProgress();
+      /* ---------- LOAD MANIFEST ---------- */
+
+      fetch("data/exercises.json")
+        .then((res) => res.json())
+        .then((data) => {
+          window.exerciseIndex = data;
+          renderExercises(data);
+        });
     </script>
   </body>
 </html>
