@@ -6,15 +6,32 @@
   </head>
   <body>
     <h1>Exercises</h1>
+    <p>Select an exercise. Your progress is shown below.</p>
 
     <ul>
       <li>
         <a href="exercises/exercise.html?exercise=exercise_ながら">
           ながら — Exercises
         </a>
+        <span id="progress-exercise_ながら"> (0/0)</span>
       </li>
     </ul>
 
     <a href="index.html">← Back</a>
+
+    <script>
+      const progressData = JSON.parse(localStorage.getItem("progress") || "{}");
+
+      document.querySelectorAll("[id^='progress-']").forEach((el) => {
+        const exerciseName = el.id.replace("progress-", "");
+        const data = progressData[exerciseName];
+
+        if (data) {
+          el.textContent = ` (${data.correct}/${data.total})`;
+        } else {
+          el.textContent = " (0/0)";
+        }
+      });
+    </script>
   </body>
 </html>
