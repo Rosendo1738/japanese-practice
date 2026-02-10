@@ -2,27 +2,47 @@
   "title": "Location Words — Usage (2)",
   "instructions": "Translate the sentence into Japanese.",
   "wordBank": [
-    { "en": "outside", "jp": "外" },
-    { "en": "next to", "jp": "隣" },
-    { "en": "near", "jp": "近く" },
-    { "en": "far", "jp": "遠く" }
+    { "en": "outside", "jp": "外（そと）" },
+    { "en": "next to", "jp": "隣（となり）" },
+    { "en": "near", "jp": "近く（ちかく）" },
+    { "en": "far", "jp": "遠く（とおく）" }
   ],
   "questions": [
     {
       "prompt": "The shoes are outside the house.",
-      "answers": ["くつは家の外です", "くつは 家の 外です"]
+      "answers": [
+        "くつは家の外です",
+        "くつは 家の 外です",
+        "くつは家の外（そと）です",
+        "くつは 家の 外（そと）です"
+      ]
     },
     {
       "prompt": "My house is next to the park.",
-      "answers": ["私の家は公園の隣です", "私の 家は 公園の 隣です"]
+      "answers": [
+        "私の家は公園の隣です",
+        "私の 家は 公園の 隣です",
+        "私の家は公園の隣（となり）です",
+        "私の 家は 公園の 隣（となり）です"
+      ]
     },
     {
       "prompt": "The school is near the station.",
-      "answers": ["学校はえきの近くです", "学校は えきの 近くです"]
+      "answers": [
+        "学校はえきの近くです",
+        "学校は えきの 近くです",
+        "学校はえきの近く（ちかく）です",
+        "学校は えきの 近く（ちかく）です"
+      ]
     },
     {
       "prompt": "That town is far from here.",
-      "answers": ["その町はここから遠くです", "その 町は ここから 遠くです"]
+      "answers": [
+        "その町はここから遠いです",
+        "その 町は ここから 遠いです",
+        "その町はここから遠くにあります",
+        "その町はここから遠く（とおく）にあります"
+      ]
     }
   ]
 }
