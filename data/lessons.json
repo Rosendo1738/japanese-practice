@@ -24,6 +24,41 @@
     "file": "verb-stems.html"
   },
   {
+    "id": "te-form",
+    "title": "て-Form",
+    "groups": ["te-form", "foundations"],
+    "file": "te-form.html",
+    "description": "Learn how to change verbs into the て-form. This is the foundation for many important grammar patterns."
+  },
+  {
+    "id": "tekudasai",
+    "title": "〜てください",
+    "groups": ["te-form"],
+    "file": "tekudasai.html",
+    "description": "Use the て-form with ください to make polite requests."
+  },
+  {
+    "id": "two-actions-te",
+    "title": "Chaining Actions with て",
+    "groups": ["te-form"],
+    "file": "two-actions-te.html",
+    "description": "Use the て-form to connect two actions that happen in sequence."
+  },
+  {
+    "id": "te-permission",
+    "title": "〜てもいいです — Asking for and Giving Permission",
+    "groups": ["te-form"],
+    "file": "te-permission.html",
+    "description": "Learn how to ask for and give permission using the て-form."
+  },
+  {
+    "id": "te-not-allowed",
+    "title": "〜てはいけません — Prohibiting Actions",
+    "groups": ["te-form"],
+    "file": "te-not-allowed.html",
+    "description": "Use the て-form to say something is not allowed or prohibited."
+  },
+  {
     "id": "nagara",
     "title": "ながら",
     "groups": ["nagara"],
