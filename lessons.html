@@ -14,20 +14,19 @@
         font-weight: bold;
       }
 
-      .lesson-content {
-        display: none;
-        margin-left: 16px;
-        margin-top: 16px;
-        padding: 12px;
-        border-left: 3px solid #ddd;
-      }
-
       .lesson-link {
         cursor: pointer;
         color: #0066cc;
         text-decoration: underline;
         display: block;
         margin: 6px 0;
+      }
+
+      .lesson-content {
+        margin-left: 16px;
+        margin-top: 16px;
+        padding: 12px;
+        border-left: 3px solid #ddd;
       }
 
       .exercise-link {
@@ -57,12 +56,18 @@
     </div>
 
     <script>
-      /* ---------- GitHub Pages–safe base path ---------- */
-      const BASE_PATH = window.location.hostname.includes("github.io")
-        ? `/${window.location.pathname.split("/")[1]}`
-        : "";
+      /* =========================================================
+         Robust BASE_PATH (works on GitHub Pages + locally)
+         ========================================================= */
+      const BASE_PATH = (() => {
+        const scriptSrc = document.currentScript.src;
+        const scriptDir = scriptSrc.substring(0, scriptSrc.lastIndexOf("/"));
+        return scriptDir.replace(window.location.origin, "");
+      })();
 
-      /* ---------- Render lesson list ---------- */
+      /* =========================================================
+         Render lesson list
+         ========================================================= */
       function renderLessons(lessons) {
         const container = document.getElementById("lesson-list");
         container.innerHTML = "";
@@ -108,7 +113,9 @@
         });
       }
 
-      /* ---------- Load lesson HTML ---------- */
+      /* =========================================================
+         Load lesson HTML + hook exercise buttons
+         ========================================================= */
       function loadLesson(lesson) {
         fetch(`${BASE_PATH}/lessons/${lesson.file}`)
           .then((res) => {
@@ -116,50 +123,53 @@
             return res.text();
           })
           .then((html) => {
-            // remove any existing lesson
             document
               .querySelectorAll(".lesson-content")
               .forEach((el) => el.remove());
 
-            const container = document.createElement("div");
-            container.className = "lesson-content";
-            container.innerHTML = html;
+            const content = document.createElement("div");
+            content.className = "lesson-content";
+            content.innerHTML = html;
 
-            // hook exercise buttons inside lesson HTML
-            container.querySelectorAll(".exercise-link").forEach((btn) => {
-              btn.onclick = () => {
+            /* Hook "Practice exercises →" buttons */
+            content.querySelectorAll(".exercise-link").forEach((btn) => {
+              btn.addEventListener("click", () => {
                 const lessonId = btn.dataset.lesson;
                 window.location.href = `${BASE_PATH}/exercises.html?lesson=${lessonId}`;
-              };
+              });
             });
 
-            document.querySelector(".container").appendChild(container);
-            container.style.display = "block";
+            document.querySelector(".container").appendChild(content);
 
             window.scrollTo({
-              top: container.offsetTop - 20,
+              top: content.offsetTop - 20,
               behavior: "smooth",
             });
           })
           .catch((err) => {
-            alert("Failed to load lesson.");
             console.error(err);
+            alert("Failed to load lesson.");
           });
       }
 
-      /* ---------- Group name formatting ---------- */
+      /* =========================================================
+         Group name display
+         ========================================================= */
       function formatGroupName(key) {
         const map = {
           foundations: "Foundations",
           "verb-stems": "Verb Stems",
           nagara: "ながら",
           "nari-nari": "〜なり〜なり",
+          location: "Location",
           other: "Other",
         };
         return map[key] || key;
       }
 
-      /* ---------- Load lessons data ---------- */
+      /* =========================================================
+         Load lessons index
+         ========================================================= */
       fetch(`${BASE_PATH}/data/lessons.json`)
         .then((res) => {
           if (!res.ok) throw new Error("lessons.json not found");
@@ -167,8 +177,8 @@
         })
         .then((data) => renderLessons(data))
         .catch((err) => {
-          alert("Failed to load lessons list.");
           console.error(err);
+          alert("Failed to load lessons list.");
         });
     </script>
   </body>
