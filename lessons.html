@@ -129,7 +129,7 @@
             container.querySelectorAll(".exercise-link").forEach((btn) => {
               btn.onclick = () => {
                 const lessonId = btn.dataset.lesson;
-                window.location.href = `${BASE_PATH}/exercises.html?lesson=${lessonId}`;
+                window.location.href = `${BASE_PATH}/exercises/exercise.html?exercise=${lessonId}`;
               };
             });
 
