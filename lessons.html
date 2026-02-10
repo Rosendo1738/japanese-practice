@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Lessons</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/japanese-practice/css/style.css" />
 
     <style>
       .group-header {
@@ -58,19 +58,14 @@
 
       <div id="lesson-list"></div>
 
-      <a href="index.html">← Back</a>
+      <a href="/japanese-practice/index.html">← Back</a>
     </div>
 
     <script>
       /* --------------------------------------------------
-         BASE PATH (GitHub Pages–safe, bullet-proof)
+         HARD-CODED PROJECT ROOT
          -------------------------------------------------- */
-      const BASE_PATH =
-        location.hostname === "rosendo1738.github.io"
-          ? "/" + location.pathname.split("/")[1]
-          : "";
-
-      console.log("BASE_PATH:", BASE_PATH);
+      const BASE_PATH = "/japanese-practice";
 
       /* --------------------------------------------------
          Render lesson list
@@ -138,7 +133,6 @@
             const container = document.createElement("div");
             container.className = "lesson-content";
 
-            // safety: strip scripts from lesson HTML
             container.innerHTML = html.replace(
               /<script[\s\S]*?>[\s\S]*?<\/script>/gi,
               "",
@@ -147,22 +141,15 @@
             container.querySelectorAll(".exercise-link").forEach((btn) => {
               btn.onclick = () => {
                 const lessonId = btn.dataset.lesson;
-                const target = `${BASE_PATH}/exercises/exercise.html?exercise=${lessonId}`;
-
-                console.log("Redirecting to:", target);
-                window.location.href = target;
+                window.location.href = `${BASE_PATH}/exercises/exercise.html?exercise=${lessonId}`;
               };
             });
 
             anchorEl.after(container);
             container.style.display = "block";
-
-            container.scrollIntoView({ behavior: "smooth", block: "start" });
+            container.scrollIntoView({ behavior: "smooth" });
           })
-          .catch((err) => {
-            alert("Failed to load lesson.");
-            console.error(err);
-          });
+          .catch(() => alert("Failed to load lesson."));
       }
 
       /* --------------------------------------------------
@@ -187,11 +174,8 @@
           if (!res.ok) throw new Error("lessons.json not found");
           return res.json();
         })
-        .then((data) => renderLessons(data))
-        .catch((err) => {
-          alert("Failed to load lessons list.");
-          console.error(err);
-        });
+        .then(renderLessons)
+        .catch(() => alert("Failed to load lessons list."));
     </script>
   </body>
 </html>
