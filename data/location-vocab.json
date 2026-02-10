@@ -1,0 +1,43 @@
+{
+  "title": "Location Words — Vocabulary",
+  "instructions": "Learn common Japanese location words. Type the Japanese word for the meaning shown.",
+  "wordBank": [],
+  "questions": [
+    {
+      "prompt": "on / above",
+      "answers": ["上", "うえ"]
+    },
+    {
+      "prompt": "under / below",
+      "answers": ["下", "した"]
+    },
+    {
+      "prompt": "inside",
+      "answers": ["中", "なか"]
+    },
+    {
+      "prompt": "outside",
+      "answers": ["外", "そと"]
+    },
+    {
+      "prompt": "in front of",
+      "answers": ["前", "まえ"]
+    },
+    {
+      "prompt": "behind",
+      "answers": ["後ろ", "うしろ"]
+    },
+    {
+      "prompt": "next to",
+      "answers": ["隣", "となり"]
+    },
+    {
+      "prompt": "near",
+      "answers": ["近く", "ちかく"]
+    },
+    {
+      "prompt": "far",
+      "answers": ["遠く", "とおく"]
+    }
+  ]
+}

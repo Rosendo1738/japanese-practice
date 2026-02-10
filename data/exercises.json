@@ -10,6 +10,21 @@
     "groups": ["foundations"]
   },
   {
+    "id": "exercise_location_vocab",
+    "title": "Location Words — Vocabulary",
+    "groups": ["location"]
+  },
+  {
+    "id": "exercise_location_usage_1",
+    "title": "Location Words — Usage (1)",
+    "groups": ["location"]
+  },
+  {
+    "id": "exercise_location_usage_2",
+    "title": "Location Words — Usage (2)",
+    "groups": ["location"]
+  },
+  {
     "id": "exercise_verb_stem_1",
     "title": "Verb Stems — Exercises",
     "groups": ["verb-stems", "nagara"]

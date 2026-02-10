@@ -12,6 +12,12 @@
     "file": "no-particle.html"
   },
   {
+    "id": "location-words",
+    "title": "Location Words",
+    "groups": ["location"],
+    "file": "location-words.html"
+  },
+  {
     "id": "verb-stems",
     "title": "Verb Stems (ます-stem)",
     "groups": ["foundations", "nagara"],
