@@ -23,11 +23,16 @@
       }
 
       .lesson-link {
+        background: none;
+        border: none;
+        padding: 0;
         cursor: pointer;
         color: #0066cc;
         text-decoration: underline;
         display: block;
         margin: 6px 0;
+        font: inherit;
+        text-align: left;
       }
 
       .exercise-link {
@@ -57,12 +62,19 @@
     </div>
 
     <script>
-      /* ---------- GitHub Pages–safe base path ---------- */
-      const BASE_PATH = window.location.hostname.includes("github.io")
-        ? `/${window.location.pathname.split("/")[1]}`
-        : "";
+      /* --------------------------------------------------
+         BASE PATH (GitHub Pages–safe, bullet-proof)
+         -------------------------------------------------- */
+      const BASE_PATH =
+        location.hostname === "rosendo1738.github.io"
+          ? "/" + location.pathname.split("/")[1]
+          : "";
 
-      /* ---------- Render lesson list ---------- */
+      console.log("BASE_PATH:", BASE_PATH);
+
+      /* --------------------------------------------------
+         Render lesson list
+         -------------------------------------------------- */
       function renderLessons(lessons) {
         const container = document.getElementById("lesson-list");
         container.innerHTML = "";
@@ -96,10 +108,11 @@
           };
 
           items.forEach((lesson) => {
-            const link = document.createElement("div");
+            const link = document.createElement("button");
             link.className = "lesson-link";
+            link.type = "button";
             link.textContent = lesson.title;
-            link.onclick = () => loadLesson(lesson);
+            link.onclick = () => loadLesson(lesson, link);
             groupDiv.appendChild(link);
           });
 
@@ -108,38 +121,43 @@
         });
       }
 
-      /* ---------- Load lesson HTML ---------- */
-      function loadLesson(lesson) {
+      /* --------------------------------------------------
+         Load lesson HTML
+         -------------------------------------------------- */
+      function loadLesson(lesson, anchorEl) {
         fetch(`${BASE_PATH}/lessons/${lesson.file}`)
           .then((res) => {
             if (!res.ok) throw new Error("Lesson not found");
             return res.text();
           })
           .then((html) => {
-            // remove any existing lesson
             document
               .querySelectorAll(".lesson-content")
               .forEach((el) => el.remove());
 
             const container = document.createElement("div");
             container.className = "lesson-content";
-            container.innerHTML = html;
 
-            // hook exercise buttons inside lesson HTML
+            // safety: strip scripts from lesson HTML
+            container.innerHTML = html.replace(
+              /<script[\s\S]*?>[\s\S]*?<\/script>/gi,
+              "",
+            );
+
             container.querySelectorAll(".exercise-link").forEach((btn) => {
               btn.onclick = () => {
                 const lessonId = btn.dataset.lesson;
-                window.location.href = `${BASE_PATH}/exercises/exercise.html?exercise=${lessonId}`;
+                const target = `${BASE_PATH}/exercises/exercise.html?exercise=${lessonId}`;
+
+                console.log("Redirecting to:", target);
+                window.location.href = target;
               };
             });
 
-            document.querySelector(".container").appendChild(container);
+            anchorEl.after(container);
             container.style.display = "block";
 
-            window.scrollTo({
-              top: container.offsetTop - 20,
-              behavior: "smooth",
-            });
+            container.scrollIntoView({ behavior: "smooth", block: "start" });
           })
           .catch((err) => {
             alert("Failed to load lesson.");
@@ -147,7 +165,9 @@
           });
       }
 
-      /* ---------- Group name formatting ---------- */
+      /* --------------------------------------------------
+         Group name formatting
+         -------------------------------------------------- */
       function formatGroupName(key) {
         const map = {
           foundations: "Foundations",
@@ -159,7 +179,9 @@
         return map[key] || key;
       }
 
-      /* ---------- Load lessons data ---------- */
+      /* --------------------------------------------------
+         Load lessons.json
+         -------------------------------------------------- */
       fetch(`${BASE_PATH}/data/lessons.json`)
         .then((res) => {
           if (!res.ok) throw new Error("lessons.json not found");
